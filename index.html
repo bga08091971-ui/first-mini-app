@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Моя первая Mini App</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 24px;
+      background: var(--tg-theme-bg-color, #ffffff);
+      color: var(--tg-theme-text-color, #222222);
+    }
+
+    input, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      font: inherit;
+      border-radius: 10px;
+    }
+
+    input {
+      border: 1px solid #888888;
+      background: inherit;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      background: var(--tg-theme-button-color, #2481cc);
+      color: var(--tg-theme-button-text-color, #ffffff);
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Давай познакомимся</h1>
+
+  <form id="form">
+    <label for="name">Как тебя зовут?</label>
+    <input id="name" autocomplete="given-name"
+           placeholder="Например, Анна" maxlength="60" required>
+    <button type="submit">Продолжить</button>
+  </form>
+
+  <p id="result" role="status"></p>
+
+  <script>
+    const tg = window.Telegram?.WebApp;
+    tg?.ready();
+
+    const form = document.getElementById("form");
+    const nameInput = document.getElementById("name");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = nameInput.value.trim();
+
+      if (!name) {
+        result.textContent = "Пожалуйста, введи имя.";
+        return;
+      }
+
+      result.textContent = `Привет, ${name}! Приложение работает.`;
+    });
+  </script>
+</body>
+</html>
