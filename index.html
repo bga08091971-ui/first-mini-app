@@ -71,7 +71,10 @@
         return;
       }
 
-      result.textContent = `Привет, ${name}! Приложение работает.`;
+      tg.sendData(JSON.stringify({
+  event: "miniapp_form",
+  name: name
+}));
     });
   </script>
 </body>
